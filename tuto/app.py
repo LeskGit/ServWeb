@@ -10,7 +10,8 @@ def mkpath (p):
         os.path.join(
             os.path. dirname ( __file__ ),
             p))
+    
 from flask_sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = (
-'sqlite :/// '+mkpath('../ myapp.db'))
-db = SQLAlchemy (app)
+'sqlite:///'+mkpath('../myapp.db'))
+db = SQLAlchemy(app)
