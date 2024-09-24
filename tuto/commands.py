@@ -10,7 +10,7 @@ def loaddb(filename):
     db.create_all()
     
     import yaml
-    books = yaml.safe_load_all(open(filename))
+    books = yaml.safe_load(open(filename))
     
     from .models import Author, Book
     
@@ -26,11 +26,11 @@ def loaddb(filename):
     
     
     for b in books:
-        a = authors [b["author"]]
+        a = authors[b["author"]]
         o = Book(price = b["price"],
                 title = b["title"],
                 url = b["url"] ,
-                img = b["img"] ,
+                image = b["img"] ,
                 author_id = a.id)
         db.session.add(o)
     db.session.commit()
