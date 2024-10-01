@@ -2,7 +2,16 @@
 
 import yaml, os.path
 from .app import db
+from flask_login import UserMixin
 
+
+class User(db.Model):
+    username = db.Column(db.String(50), primary_key=True)
+    password = db.Column(db.String(64))
+    
+    def get_id(self):
+        return self.username
+    
 
 
 class Author(db.Model):
