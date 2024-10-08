@@ -41,3 +41,32 @@ def syncdb():
         Create all missing tables
     '''
     db.create_all()
+    
+@app.cli.command()
+@click.argument('username')
+@click.argument('password')
+def newuser(username, password):
+    """New user"""
+    from .models import User
+    from hashlib import sha256
+    m = sha256()
+    m.update(password.encode())
+    u = User(username=username, password=m.hexdigest())
+    db.session.add(u)
+    db.session.commit()
+    
+#@app.cli.command()
+#@click.argument('username')
+#@click.argument('password')
+#def passwd(username, password):
+#    """Update psswd"""
+#    from .models import User
+#    from hashlib import sha256
+#    
+#    u = User.get_id(username)
+#
+#    m = sha256()
+#    m.update(password.encode())
+#    u.update(password=m.hexdigest())
+#    db.session.add(u)
+#    db.session.commit()
